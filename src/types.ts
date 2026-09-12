@@ -1,6 +1,6 @@
 /**
  * Public types for the adaptive mastery engine.
- * 
+ *
  * Core state interface for tracking topic mastery using a hybrid of:
  * - Glicko-2 (mu, phi, sigma)
  * - 3PL IRT (Item Response Theory)
@@ -10,19 +10,19 @@
 export interface TopicMasteryState {
   /** Ability rating in logit space. Clamped to [-4, 6]; defaults to 0. */
   mu: number;
-  
+
   /** Rating Deviation / Uncertainty (Glicko-2 phi) - default 2.02 */
   phi: number;
-  
+
   /** Volatility / Consistency (Glicko-2 sigma) - default 0.06 */
   sigma: number;
-  
+
   /** FSRS memory strength in days - default 0.1 */
   stability: number;
-  
+
   /** FSRS topic difficulty - default 5.0 */
   difficulty: number;
-  
+
   /** Timestamp of last interaction */
   lastSeenAt: Date;
 }
@@ -30,7 +30,7 @@ export interface TopicMasteryState {
 /**
  * Question types for IRT parameter selection
  */
-export type QuestionType = 'TF' | 'MCQ' | 'LONG';
+export type QuestionType = "TF" | "MCQ" | "LONG";
 
 /**
  * IRT parameters for different question types
@@ -46,7 +46,7 @@ export interface IRTParameters {
  * Practice question interaction
  */
 export interface PracticeInteraction {
-  type: 'practice';
+  type: "practice";
   correct: boolean;
   questionType: QuestionType;
   userConfidence: number; // 0 to 1
@@ -65,7 +65,7 @@ export interface PracticeInteraction {
  * Exam interaction (batch of 15+ questions)
  */
 export interface ExamInteraction {
-  type: 'exam';
+  type: "exam";
   questions: Array<{
     correct: boolean;
     questionType: QuestionType;
@@ -79,14 +79,15 @@ export interface ExamInteraction {
  * Flashcard interaction (FSRS grade)
  */
 export interface FlashcardInteraction {
-  type: 'flashcard';
+  type: "flashcard";
   grade: 1 | 2 | 3 | 4; // FSRS grade: 1=Fail, 2=Hard, 3=Good, 4=Easy
 }
 
 /**
  * Union type for all interaction types
  */
-export type Interaction = PracticeInteraction | ExamInteraction | FlashcardInteraction;
+export type Interaction =
+  PracticeInteraction | ExamInteraction | FlashcardInteraction;
 
 /**
  * Result of processing an interaction
@@ -137,9 +138,9 @@ export interface TopicHealthReport {
   /** Whether the user is ready for an exam (phi < 1.0 and mu > 1.5) */
   isExamReady: boolean;
   /** Memory health status based on retrievability */
-  memoryHealth: 'Fresh' | 'Fading' | 'Forgotten';
+  memoryHealth: "Fresh" | "Fading" | "Forgotten";
   /** Consistency level based on volatility */
-  consistencyLevel: 'Erratic' | 'Steady' | 'Expert';
+  consistencyLevel: "Erratic" | "Steady" | "Expert";
   /** Days until score drops below 90% of current value */
   daysUntilDecay: number;
   /** Human-readable study advice based on current state */

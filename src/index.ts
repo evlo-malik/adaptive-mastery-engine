@@ -5,7 +5,7 @@
  * spaced-repetition decay. It stores no data and makes no network requests.
  */
 
-export { MasteryService } from './mastery-service';
+export { MasteryService } from "./mastery-service";
 export type {
   ExamInteraction,
   FlashcardInteraction,
@@ -18,7 +18,7 @@ export type {
   QuestionType,
   TopicHealthReport,
   TopicMasteryState,
-} from './types';
+} from "./types";
 export {
   COLD_START_PHI,
   DEFAULT_DIFFICULTY,
@@ -34,4 +34,4 @@ export {
   MIN_MU,
   QUESTION_UPDATE_K,
   TIME_DECAY_THRESHOLD_MINUTES,
-} from './constants';
+} from "./constants";

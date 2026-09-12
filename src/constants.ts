@@ -1,6 +1,6 @@
 /**
  * Adaptive mastery constants.
- * 
+ *
  * Mathematical constants and default values for the mastery engine
  */
 
@@ -24,30 +24,33 @@ export const TIME_DECAY_THRESHOLD_MINUTES = 20;
 
 /** FSRS 4.5.1 weights (17 parameters) */
 export const FSRS_WEIGHTS = [
-  0.4,   // w[0] - initial stability for grade 1
-  0.6,   // w[1] - initial stability step
-  2.4,   // w[2] - initial difficulty for grade 1
-  5.8,   // w[3] - initial difficulty step
-  4.93,  // w[4] - initial difficulty mean
-  0.94,  // w[5] - initial difficulty step for grade
-  0.86,  // w[6] - difficulty update step
-  0.01,  // w[7] - difficulty retention
-  1.49,  // w[8] - stability update factor
-  0.14,  // w[9] - stability decay exponent
-  0.94,  // w[10] - grade factor
-  2.18,  // w[11] - grade exponent
-  0.05,  // w[12] - failure stability base
-  0.34,  // w[13] - failure difficulty exponent
-  1.26,  // w[14] - failure stability exponent
-  0.29,  // w[15] - failure grade factor
-  2.61,  // w[16] - failure constant
+  0.4, // w[0] - initial stability for grade 1
+  0.6, // w[1] - initial stability step
+  2.4, // w[2] - initial difficulty for grade 1
+  5.8, // w[3] - initial difficulty step
+  4.93, // w[4] - initial difficulty mean
+  0.94, // w[5] - initial difficulty step for grade
+  0.86, // w[6] - difficulty update step
+  0.01, // w[7] - difficulty retention
+  1.49, // w[8] - stability update factor
+  0.14, // w[9] - stability decay exponent
+  0.94, // w[10] - grade factor
+  2.18, // w[11] - grade exponent
+  0.05, // w[12] - failure stability base
+  0.34, // w[13] - failure difficulty exponent
+  1.26, // w[14] - failure stability exponent
+  0.29, // w[15] - failure grade factor
+  2.61, // w[16] - failure constant
 ];
 
 /** IRT parameters for different question types */
-export const IRT_PARAMS: Record<'TF' | 'MCQ' | 'LONG', { a: number; c: number }> = {
-  TF: { a: 1.0, c: 0.5 },    // True/False: 50% guessing
-  MCQ: { a: 1.2, c: 0.25 },  // Multiple Choice: 25% guessing (4 options)
-  LONG: { a: 3.0, c: 0.0 },  // Long Answer: No guessing, high discrimination
+export const IRT_PARAMS: Record<
+  "TF" | "MCQ" | "LONG",
+  { a: number; c: number }
+> = {
+  TF: { a: 1.0, c: 0.5 }, // True/False: 50% guessing
+  MCQ: { a: 1.2, c: 0.25 }, // Multiple Choice: 25% guessing (4 options)
+  LONG: { a: 3.0, c: 0.0 }, // Long Answer: No guessing, high discrimination
 };
 
 /** Weighting constant for flashcard updates to mu */
@@ -63,7 +66,7 @@ export const MAX_MU = 6.0;
 export const MIN_MU = -4.0;
 
 /** Streak bonus: multiply delta by (1 + this * min(streak-1, MAX_STREAK_FOR_BONUS-1)) when correct. */
-export const STREAK_BONUS_PER_CORRECT = 0.50;
+export const STREAK_BONUS_PER_CORRECT = 0.5;
 /** Max streak count used in bonus; 10+ correct in a row = 1 + 0.50*9 = 5.5x delta. */
 export const MAX_STREAK_FOR_BONUS = 10;
 /** When streak >= 4, minimum delta scales by (1 + this * min(streak-3, 7)) so high streaks keep moving mastery. */
@@ -75,7 +78,7 @@ export const QUESTION_UPDATE_K = 0.05;
 /** Base multiplier for long-response so written answers move mastery visibly. Final multiplier = this × (totalMarks/5) × outcome. Kept moderate to avoid one question swinging 80%+. */
 export const LONG_RESPONSE_BOOST_BASE = 2.5;
 /** Minimum mu-delta for a correct long-response so mastery always moves (real-time feel). */
-export const MIN_DELTA_MU_CORRECT_LONG = 0.10;
+export const MIN_DELTA_MU_CORRECT_LONG = 0.1;
 /** Maximum mu-delta for a correct long-response in one question (prevents 12%→100% in one answer). */
 export const MAX_REWARD_MU_LONG = 0.45;
 /** Maximum mu-delta penalty for a wrong long-response in one question (prevents 98%→2% in one answer). */
@@ -103,7 +106,7 @@ export const MU_THRESHOLD_MCQ_TF_DISCOUNT = 1.0;
 /** Scale factor for MCQ/TF delta when mu > MU_THRESHOLD_MCQ_TF_DISCOUNT (e.g. 0.5 = half impact). */
 export const MCQ_TF_DELTA_SCALE_AT_HIGH_MU = 0.45;
 /** Minimum mu-delta magnitude for any wrong answer so mastery always drops in real time, even at high mastery. */
-export const MIN_DELTA_MU_WRONG_ANY = 0.10;
+export const MIN_DELTA_MU_WRONG_ANY = 0.1;
 
 /** When correct, cap effective expected prob so delta stays substantial at high mastery (weaker diminishing returns). Lower = more responsive. */
 export const CAP_EXPECTED_FOR_CORRECT = 0.62;
